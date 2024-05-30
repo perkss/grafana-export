@@ -17,8 +17,8 @@ export const GrafanaExport = (): PluginInterface => {
   const errorBuilder = buildErrorMessage(GrafanaExport.name);
 
   const createCsvContent = (
-      inputs: PluginParams[],
-      headers: string[]
+    inputs: PluginParams[],
+    headers: string[]
   ): string => {
     return [
       headers.join(','),
@@ -36,19 +36,19 @@ export const GrafanaExport = (): PluginInterface => {
       await fs.mkdir(dirPath, {recursive: true});
     } catch (error) {
       throw new MakeDirectoryError(
-          errorBuilder({
-            message: `Failed to create directory for CSV at path: ${dirPath} ${error}`,
-          })
+        errorBuilder({
+          message: `Failed to create directory for CSV at path: ${dirPath} ${error}`,
+        })
       );
     }
 
     const contentHeaders =
-        headers &&
-        headers.length === 0 &&
-        Array.isArray(inputs) &&
-        inputs.length > 0
-            ? Object.keys(inputs[0])
-            : headers;
+      headers &&
+      headers.length === 0 &&
+      Array.isArray(inputs) &&
+      inputs.length > 0
+        ? Object.keys(inputs[0])
+        : headers;
 
     const contents = createCsvContent(inputs, contentHeaders);
 
@@ -56,9 +56,9 @@ export const GrafanaExport = (): PluginInterface => {
       await fs.writeFile(outputPath, contents);
     } catch (error) {
       throw new WriteFileError(
-          errorBuilder({
-            message: `Failed to write CSV to ${outputPath} ${error}`,
-          })
+        errorBuilder({
+          message: `Failed to write CSV to ${outputPath} ${error}`,
+        })
       );
     }
 
@@ -68,7 +68,7 @@ export const GrafanaExport = (): PluginInterface => {
   const validateConfig = (config?: ConfigParams) => {
     if (!config) {
       throw new InputValidationError(
-          errorBuilder({message: 'Configuration data is missing'})
+        errorBuilder({message: 'Configuration data is missing'})
       );
     }
 

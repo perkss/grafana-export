@@ -34,8 +34,8 @@ This is how you could run the model in Typescript:
 
 ```typescript
 async function runPlugin() {
-    const newModel = GrafanaExport();
-    const usage = await output.execute([
+    const newPlugin = GrafanaExport();
+    const usage = await newPlugin.execute([
         {
             timestamp: '2023-07-06T00:00',
             duration: 1,
